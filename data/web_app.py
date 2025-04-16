@@ -4,23 +4,23 @@ import pandas as pd
 from tensorflow.keras.models import load_model
 from dash import Dash, html, dcc, Input, Output
 
-with open("scaler.pkl", "rb") as f:
+with open("../src/scaler.pkl", "rb") as f:
     scaler = pickle.load(f)
 
-with open("input_columns.pkl", "rb") as f:
+with open("../src/features.pkl", "rb") as f:
     input_columns = pickle.load(f)
 
 # Load your models
-with open("xgboost_model.pkl", "rb") as f:
+with open("../src/xgboost_model.pkl", "rb") as f:
     xgb_model = pickle.load(f)
 
-with open("logistic_regression_model.pkl", "rb") as f:
+with open("../src/logistic_regression_model.pkl", "rb") as f:
     logistic_model = pickle.load(f)
 
-with open("random_forest_model.pkl", "rb") as f:
+with open("../src/random_forest_model.pkl", "rb") as f:
     rf_model = pickle.load(f)
 
-dl_model = load_model("deep_learning_model.h5")
+dl_model = load_model("../src/deep_learning_model.h5")
 
 # Sample input layout
 app = Dash(__name__)
