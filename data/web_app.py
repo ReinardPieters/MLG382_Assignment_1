@@ -30,7 +30,7 @@ app.layout = html.Div([
     dcc.Input(id='age', type='number', placeholder='Age'),
     dcc.Dropdown(
             id='gender', 
-            options=[{'label': 'Male', 'value': 0}, {'label': 'Female', 'value': 1}],
+            options=[{'label': 'Male - 0', 'value': 0}, {'label': 'Female - 1', 'value': 1}],
             placeholder="Select Gender"
                 ),
     dcc.Input(id='study_time', type='number', placeholder='Study Time Weekly'),
@@ -38,17 +38,35 @@ app.layout = html.Div([
     dcc.Input(id='gpa', type='number', placeholder='GPA'),
     dcc.Dropdown(
         id='ethnicity',
-        options=[{'label': f'Ethnicity_{i}', 'value': i} for i in range(4)],
+        options=[
+            {'label': 'Caucasian - 0', 'value': 0},
+            {'label': 'African American - 1', 'value': 1},
+            {'label': 'Asian - 2', 'value': 2},
+            {'label': 'Other - 3', 'value': 3}
+        ],
         placeholder="Select Ethnicity"
     ),
+
     dcc.Dropdown(
         id='parental_education',
-        options=[{'label': f'Parental Education {i}', 'value': i} for i in range(5)],
+        options=[
+            {'label': 'None - 0', 'value': 0},
+            {'label': 'High School - 1', 'value': 1},
+            {'label': 'Some College - 2', 'value': 2},
+            {'label': 'Bachelors - 3', 'value': 3},
+            {'label': 'Higher Study - 4', 'value': 4}
+        ],
         placeholder="Select Parental Education"
     ),
     dcc.Dropdown(
         id='parental_support',
-        options=[{'label': f'Parental Support {i}', 'value': i} for i in range(5)],
+        options=[
+            {'label': 'None - 0', 'value': 0},
+            {'label': 'Low - 1', 'value': 1},
+            {'label': 'Moderate - 2', 'value': 2},
+            {'label': 'High - 3', 'value': 3},
+            {'label': 'Very High - 4', 'value': 4}
+        ],
         placeholder="Select Parental Support"
     ),
     dcc.Checklist(
