@@ -1,9 +1,5 @@
 dash
 dash_bootstrap_components
 tensorflow
-xgboost
 pandas
 numpy
-scikit-learn
-seaborn
-matplotlib
