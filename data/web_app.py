@@ -8,20 +8,20 @@ import dash_bootstrap_components as dbc
 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
-with open("..\\src\\scaler_test.pkl", "rb") as f:
+with open("../src/scaler_test.pkl", "rb") as f:
     scaler = pickle.load(f)
 
 
-with open("..\\src\\xgboost_model.pkl", "rb") as f:
+with open("../src/xgboost_model.pkl", "rb") as f:
     xgb_model = pickle.load(f)
 
-with open("..\\src\\logistic_regression_model.pkl", "rb") as f:
+with open("../src/logistic_regression_model.pkl", "rb") as f:
     logistic_model = pickle.load(f)
 
-with open("..\\src\\random_forest_model.pkl", "rb") as f:
+with open("../src/random_forest_model.pkl", "rb") as f:
     rf_model = pickle.load(f)
 
-dl_model = load_model("..\\src\\deep_learning_model.h5")
+dl_model = load_model("../src/deep_learning_model.h5")
 
 # Sample input layout
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
