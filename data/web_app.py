@@ -8,20 +8,34 @@ import dash_bootstrap_components as dbc
 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
-with open("../src/scaler_test.pkl", "rb") as f:
-    scaler = pickle.load(f)
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+artifacts_dir = os.path.join(base_dir, '..', 'src')
 
 
-with open("../src/xgboost_model.pkl", "rb") as f:
-    xgb_model = pickle.load(f)
+def get_DLmodel():
+    print("Loading deep learning model...")
+    model_path = os.path.join(artifacts_dir, 'deep_learning_model.h5')
+    return load_model(model_path)
 
-with open("../src/logistic_regression_model.pkl", "rb") as f:
-    logistic_model = pickle.load(f)
+def get_randomforest_model():
+    with open(os.path.join(artifacts_dir, 'random_forest_model.pkl'), 'rb') as f:
+        return pickle.load(f)
 
-with open("../src/random_forest_model.pkl", "rb") as f:
-    rf_model = pickle.load(f)
+def get_regression_model():
+    with open(os.path.join(artifacts_dir, 'logistic_regression_model.pkl'), 'rb') as f:
+        return pickle.load(f)
 
-dl_model = load_model("../src/deep_learning_model.h5")
+def get_xgboost_model():
+    with open(os.path.join(artifacts_dir, 'xgboost_model.pkl'), 'rb') as f:
+        return pickle.load(f)
+
+with open(os.path.join(artifacts_dir, 'features.pkl'), 'rb') as f:
+    features = pickle.load(f)
+
+def get_scaler():
+    with open(os.path.join(artifacts_dir, 'scaler_test.pkl'), 'rb') as f:
+        return pickle.load(f)
 
 # Sample input layout
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -168,9 +182,14 @@ def predict_grade(n_clicks, age, gender,study_time, absences, tutoring,extracurr
          input_df = pd.DataFrame(input_data)
 
          input_df = input_df
-
+         scaler = get_scaler()
          num_features = ['Age', 'StudyTimeWeekly', 'Absences']
          input_df[num_features] = scaler.transform(input_df[num_features])
+
+         dl_model = get_DLmodel()
+         rf_model = get_randomforest_model()
+         logistic_model = get_regression_model()
+         xgb_model = get_xgboost_model()
 
          log_prediction = logistic_model.predict(input_df)
          xgb_prediction = xgb_model.predict(input_df) 
