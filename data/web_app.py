@@ -37,7 +37,6 @@ def get_scaler():
     with open(os.path.join(artifacts_dir, 'scaler_test.pkl'), 'rb') as f:
         return pickle.load(f)
 
-# Sample input layout
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.layout = dbc.Container([
     dbc.Row([
@@ -214,3 +213,4 @@ if __name__ == "__main__":
         app.run(debug=True, host='127.0.0.1', port=8050)
     except Exception as e:
         print("Failed to start server:", e)
+server = app.server
